@@ -7,6 +7,7 @@
 // Type windows+R or open "Run"
 // Execute the following command:
 //  chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+window.addEventListener("load", function(){
 $.ajax({
     url: 'https://api.yelp.com/v3/businesses/search',
     type: 'GET',
@@ -30,6 +31,8 @@ $.ajax({
     error:function(xhr){
         console.log(xhr);
     }
+})
+
 })
 //function to create All Categories on site
 function writeCategories(restaurantsInfo){
@@ -148,23 +151,9 @@ function sort(button){
         }
     }
 }
-// $(window).scroll(function () {
-//     // End of the document reached?
-//     if ($(document).height() - $(this).height() == $(this).scrollTop()) {
-//         $.ajax({
-//             type: "POST",
-//             url: "index.aspx/GetData",
-//             contentType: "application/json; charset=utf-8",
-//             data: '',
-//             dataType: "json",
-//             success: function (msg) {
-//                 if (msg.d) {
-//                     $(".container").append(msg.d);
-//                 }
-//             },
-//             error: function (req, status, error) {
-//                 alert("Error try again");
-//             }
-//         });
-//     }
-// }); 
+function loadMore(oage=1, perPage=15) { 
+    let endpoint = `https://api.unsplash.com/photos/?client_id=DhiFZgzN2K4X2uDEbkJKknZNYgsd2OgHTjttpQHCLN4&page=${page}&per_page=${imgPerPage}`;
+        return this.fetch(endpoint)
+            .then((blob) => blob.json())
+            .then((data) => addImg(data));
+ }
