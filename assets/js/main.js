@@ -8,7 +8,7 @@
 // Execute the following command:
 //  chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
 window.addEventListener("load", function(){
-    onReady(onReadyCallback);
+    //onReady(onReadyCallback);
     let scrollAmount;
     let innerHeight = window.innerHeight;
     let container = this.document.querySelector("#restaurants-main");
@@ -39,6 +39,7 @@ window.addEventListener("load", function(){
         }
         
     })
+    //infinite scroll 
     window.addEventListener("scroll", function(){
         scrollAmount = window.scrollY;
         if (window.matchMedia('(max-width: 640px)').matches) {
@@ -51,7 +52,6 @@ window.addEventListener("load", function(){
             }
         }
         else{
-            // When scrollAmount is about 80% of container, call loadMore..
             if(innerHeight + scrollAmount >= container.clientHeight * 0.95 && isLoaded === false){
                 isLoaded = true;
                 setVisible('.loading', true);
@@ -179,6 +179,7 @@ function sort(button){
         }
     }
 }
+//function to load more items 
 function loadMore(location, term) { 
     $.ajax({
         url: 'https://api.yelp.com/v3/businesses/search',
@@ -194,7 +195,6 @@ function loadMore(location, term) {
         },
         success: function(data){
             console.log(data);
-            writeCategories(data);
             writeRestaurants(data);
             $('#restaurants-header button').click(function(){
                 sort(this)
