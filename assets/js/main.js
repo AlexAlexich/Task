@@ -23,7 +23,7 @@ $.ajax({
         console.log(data);
         writeCategories(data);
         writeRestaurants(data);
-        $('#restaurants-header  button').click(function(){
+        $('#restaurants-header button').click(function(){
             sort(this)
         })
     },
