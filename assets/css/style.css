@@ -6,17 +6,26 @@
 body{
     background-color: rgb(196, 193, 193);
 }
+.black{
+    color: black;
+}
 .frame{
     width: 80%;
     margin: auto;
     margin-top: 30px;
 }
 #restaurants-header {
-    /* display: flex; */
-    /* justify-content: space-around; */
     overflow: auto;
     white-space: nowrap;
-    
+}
+::-webkit-scrollbar{
+    height: 4px;
+    width: 4px;
+    background: gray;
+}
+::-webkit-scrollbar-thumb:horizontal{
+    background: #000;
+    border-radius: 10px;
 }
 #restaurants-header  button{
     width: 30% ;
@@ -41,14 +50,28 @@ body{
     margin-bottom: 30px;
 }
 .single-restaurant-image{
-    
     width: 50%;
-    height: 250px;
     margin: auto;
 }
 .single-restaurant-image img{
     margin-top: 20px;
     width: 100%;
-    height: 50%;
-    
+    height: 120px;
+}
+.single-restaurant-name{
+    width: 100%;
+    text-align: center;
+}
+.single-restaurant-name button{
+    width: 50%;
+    margin:auto;
+    height: 50px;
+    border-radius: 5px;
+    background-color: white;
+    border: 0.5px gray solid;
+    box-shadow: 1px 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px;
 }

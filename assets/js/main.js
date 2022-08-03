@@ -54,6 +54,9 @@ function writeRestaurants(restaurantsInfo){
     //creating main restaurant divs
     for(restaurant of restaurantsInfo.businesses){
         let newDiv = document.createElement('div');
+        let a = document.createElement('a');
+        //creating a tag for whole div
+        a.setAttribute('href',`${restaurant.url}`)
         newDiv.setAttribute('class', 'single-restaurant');
         let attArr = [];
         for(cat of restaurant.categories){  
@@ -66,21 +69,54 @@ function writeRestaurants(restaurantsInfo){
         parent.append(newDiv);
         //creating img div for restaurant
         let imgDiv = document.createElement('div');
-        imgDiv.setAttribute('class','single-restaurant-image')
-        newDiv.append(imgDiv);
+        imgDiv.setAttribute('class','single-restaurant-image');
+        a.append(imgDiv)
+        newDiv.append(a);
         //creating img
         let img = document.createElement('img');
-        img.setAttribute('src',`${restaurant.image_url}`)
-        img.setAttribute('alt',`${restaurant.alias}`)
+        img.setAttribute('src',`${restaurant.image_url}`);
+        img.setAttribute('alt',`${restaurant.alias}`);
         imgDiv.append(img);
         //creating div for name field
         let nameFieldDiv = document.createElement('div');
-        nameFieldDiv.setAttribute('class','single-restaurant-name')
-        newDiv.append(nameFieldDiv);
-        //creating p tag
-        let nameField= document.createElement('p')
-        nameField=`${restaurant.name}`
-        nameFieldDiv.append(nameField)
+        nameFieldDiv.setAttribute('class','single-restaurant-name');
+        a.append(nameFieldDiv);
+       // newDiv.append(a);
+        //creating button
+        let nameField= document.createElement('button');
+        nameField.innerHTML=`${restaurant.name}`;
+        nameFieldDiv.append(nameField);
+        //creating last div with price and rating as 2 separate divs
+        let priceRateDiv = document.createElement('div');
+        priceRateDiv.setAttribute('class','single-restaurant-price-rating');
+        a.append(priceRateDiv);
+        let rate = document.createElement('div');
+        rate.setAttribute('class','single-restaurant-rating');
+        priceRateDiv.append(rate);
+        let price = document.createElement('div');
+        price.setAttribute('class','single-restaurant-price');
+        priceRateDiv.append(price);
+        //making starts for 
+        //srediti zvezdice, cele brojeve i 0.5 
+        for(let i = 0;i<restaurant.rating;i++){
+            if(restaurant.rating%1==0){  
+                if(restaurant.rating==5){
+                    let icon = document.createElement('i')
+                    //<i class="fa-solid fa-star"></i>
+                    icon.setAttribute('class','fa-solid fa-star black')
+                    rate.append(icon);
+                }
+                else{
+                    let icon = document.createElement('i')
+                    //<i class="fa-solid fa-star"></i>
+                    icon.setAttribute('class','fa-solid fa-star black')
+                    rate.append(icon);
+                }
+            }
+            else{
+                
+            }
+        }
     }
    
 }
