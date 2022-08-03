@@ -7,6 +7,12 @@
 body{
     background-color: rgb(196, 193, 193);
 }
+.hide{
+    display:none;
+}
+.show{
+    display:block;
+}
 .black{
     color: black;
 }

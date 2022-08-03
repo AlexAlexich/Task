@@ -23,7 +23,9 @@ $.ajax({
         console.log(data);
         writeCategories(data);
         writeRestaurants(data);
-       
+        $('#restaurants-header  button').click(function(){
+            sort(this)
+        })
     },
     error:function(xhr){
         console.log(xhr);
@@ -126,4 +128,23 @@ function writeRestaurants(restaurantsInfo){
         lastDiv.append(btn);
     }
    
+}
+//function onBtnClickChangeCategorie
+
+function sort(button){
+    let category = button.getAttribute('data-category');
+    let restourants = $(".single-restaurant")
+    for(rest of restourants){
+        rest.classList.add('hide');
+    }
+    for(rest of restourants){
+        if(rest.getAttribute('data-category').includes(category)){
+            rest.classList.remove('hide');
+            rest.classList.add('show');
+        }
+        else{
+            rest.classList.remove('show');
+            rest.classList.add('hide');
+        }
+    }
 }
