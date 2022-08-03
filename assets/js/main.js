@@ -41,8 +41,8 @@ window.addEventListener("load", function(){
     })
     window.addEventListener("scroll", function(){
         scrollAmount = window.scrollY;
-        if (window.matchMedia('(max-device-width: 640px)').matches) {
-            if(innerHeight + scrollAmount >= container.clientHeight * (9/15)&& isLoaded === false){
+        if (window.matchMedia('(max-width: 640px)').matches) {
+            if(innerHeight + scrollAmount >= container.clientHeight * (9/20)&& isLoaded === false){
                 isLoaded = true;
                 setVisible('.loading', true);
                 onReady(onReadyCallback);
@@ -179,7 +179,7 @@ function sort(button){
         }
     }
 }
-function loadMore(location='San Jose, CA 95127', term='restaurants') { 
+function loadMore(location, term) { 
     $.ajax({
         url: 'https://api.yelp.com/v3/businesses/search',
         type: 'GET',
