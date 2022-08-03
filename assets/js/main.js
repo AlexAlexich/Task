@@ -7,8 +7,8 @@
 // Type windows+R or open "Run"
 // Execute the following command:
 //  chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+
 window.addEventListener("load", function(){
-    //onReady(onReadyCallback);
     let scrollAmount;
     let innerHeight = window.innerHeight;
     let container = this.document.querySelector("#restaurants-main");
@@ -21,6 +21,9 @@ window.addEventListener("load", function(){
         beforeSend: function(xhr){
             xhr.setRequestHeader('Authorization','Bearer TsxsfBFtXD1hxgbraNm-sb-JF-xzEzAPFDvcXHykRvZII8n4UTm67QTkr5UXKXbSHKEhReJRQLdQhUBJhA53bSR_8vxzmzNZobwrFbsUMaGrEYWTBzRqHKVewRTpYnYx');
             xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xhr.setRequestHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+            xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+            
         },
         dataType : 'json',
         data : {location:"San Jose, CA 95127",
