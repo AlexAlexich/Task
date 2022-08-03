@@ -13,7 +13,7 @@ $.ajax({
     contentType:"application/json",
     beforeSend: function(xhr){
         xhr.setRequestHeader('Authorization','Bearer TsxsfBFtXD1hxgbraNm-sb-JF-xzEzAPFDvcXHykRvZII8n4UTm67QTkr5UXKXbSHKEhReJRQLdQhUBJhA53bSR_8vxzmzNZobwrFbsUMaGrEYWTBzRqHKVewRTpYnYx');
-        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+       // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     },
     dataType : 'json',
     data : {location:"San Jose, CA 95127",
