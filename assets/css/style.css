@@ -2,12 +2,16 @@
     box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+    text-decoration: none !important;
 }
 body{
     background-color: rgb(196, 193, 193);
 }
 .black{
     color: black;
+}
+.gray{
+    color: rgb(196, 193, 193);
 }
 .frame{
     width: 80%;
@@ -35,6 +39,7 @@ body{
     margin-left: 3%;
     background-image: linear-gradient(to right,rgb(2, 241, 170),aqua);
     border: 0cm;
+    margin-bottom: 3px;
 }
 #restaurants-main{
     display: flex;
@@ -74,4 +79,24 @@ body{
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 2px;
+}
+.single-restaurant-price-rating{
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.single-restaurant-rating{
+    width: 60%;
+    text-align: center;
+}
+.single-restaurant-price{
+    width: 40%;
+   
+}
+p{
+    color:black;   
+}
+button:hover{
+    cursor: pointer;
 }

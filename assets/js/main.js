@@ -86,7 +86,7 @@ function writeRestaurants(restaurantsInfo){
         let nameField= document.createElement('button');
         nameField.innerHTML=`${restaurant.name}`;
         nameFieldDiv.append(nameField);
-        //creating last div with price and rating as 2 separate divs
+        //creating div with price and rating as 2 separate divs
         let priceRateDiv = document.createElement('div');
         priceRateDiv.setAttribute('class','single-restaurant-price-rating');
         a.append(priceRateDiv);
@@ -96,27 +96,30 @@ function writeRestaurants(restaurantsInfo){
         let price = document.createElement('div');
         price.setAttribute('class','single-restaurant-price');
         priceRateDiv.append(price);
-        //making starts for 
-        //srediti zvezdice, cele brojeve i 0.5 
-        for(let i = 0;i<restaurant.rating;i++){
-            if(restaurant.rating%1==0){  
-                if(restaurant.rating==5){
-                    let icon = document.createElement('i')
-                    //<i class="fa-solid fa-star"></i>
-                    icon.setAttribute('class','fa-solid fa-star black')
-                    rate.append(icon);
-                }
-                else{
-                    let icon = document.createElement('i')
-                    //<i class="fa-solid fa-star"></i>
-                    icon.setAttribute('class','fa-solid fa-star black')
-                    rate.append(icon);
-                }
+        //creating starts for rating
+        for(let i=0;i<5;i++){
+            var icon = document.createElement('i')
+            icon.setAttribute('class','fa-solid fa-star gray')
+            rate.append(icon);
+            if(i<restaurant.rating && restaurant.rating%1==0){
+                icon.setAttribute('class','fa-solid fa-star black')
             }
-            else{
-                
+            else if(i<restaurant.rating ){
+                icon.setAttribute('class','fa-solid fa-star black')
+                if(restaurant.rating-i==0.5 && !restaurant.rating%1==0){
+                    icon.setAttribute('class','fa-solid fa-star-half-stroke black')
+                }
             }
         }
+        //creating  price
+        let priceTag = document.createElement('p');
+        if(restaurant.price) priceTag.innerHTML=`| ${restaurant.price}`;
+        else priceTag.innerHTML=`| &#32&#32 Price not available`
+        price.append(priceTag)
+        //creating div with last button
+        let lastDiv = document.createElement('div');
+        lastDiv.setAttribute('class','single-restaurant-view-button');
+        a.append(priceRateDiv);
     }
    
 }
