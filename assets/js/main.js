@@ -8,32 +8,60 @@
 // Execute the following command:
 //  chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
 window.addEventListener("load", function(){
-$.ajax({
-    url: 'https://api.yelp.com/v3/businesses/search',
-    type: 'GET',
-    contentType:"application/json",
-    beforeSend: function(xhr){
-        xhr.setRequestHeader('Authorization','Bearer TsxsfBFtXD1hxgbraNm-sb-JF-xzEzAPFDvcXHykRvZII8n4UTm67QTkr5UXKXbSHKEhReJRQLdQhUBJhA53bSR_8vxzmzNZobwrFbsUMaGrEYWTBzRqHKVewRTpYnYx');
-        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    },
-    dataType : 'json',
-    data : {location:"San Jose, CA 95127",
-            term: "restaurants"
-    },
-    success: function(data){
-        console.log(data);
-        writeCategories(data);
-        writeRestaurants(data);
-        $('#restaurants-header button').click(function(){
-            sort(this)
-        })
-    },
-    error:function(xhr){
-        console.log(xhr);
-    }
-})
+    onReady(onReadyCallback);
+    let scrollAmount;
+    let innerHeight = window.innerHeight;
+    let container = this.document.querySelector("#restaurants-main");
+    var isLoaded = false;
+    
+    $.ajax({
+        url: 'https://api.yelp.com/v3/businesses/search',
+        type: 'GET',
+        contentType:"application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization','Bearer TsxsfBFtXD1hxgbraNm-sb-JF-xzEzAPFDvcXHykRvZII8n4UTm67QTkr5UXKXbSHKEhReJRQLdQhUBJhA53bSR_8vxzmzNZobwrFbsUMaGrEYWTBzRqHKVewRTpYnYx');
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+        },
+        dataType : 'json',
+        data : {location:"San Jose, CA 95127",
+                term: "restaurants"
+        },
+        success: function(data){
+            console.log(data);
+            writeCategories(data);
+            writeRestaurants(data);
+            $('#restaurants-header button').click(function(){
+                sort(this)
+            })
+        },
+        error:function(xhr){
+            console.log(xhr);
+        }
+        
+    })
+    window.addEventListener("scroll", function(){
+        scrollAmount = window.scrollY;
+        if (window.matchMedia('(max-device-width: 640px)').matches) {
+            if(innerHeight + scrollAmount >= container.clientHeight * (9/15)&& isLoaded === false){
+                isLoaded = true;
+                setVisible('.loading', true);
+                onReady(onReadyCallback);
+                loadMore("San Jose, CA 95127", "restaurants");
+                console.log(isLoaded)
+            }
+        }
+        else{
+            // When scrollAmount is about 80% of container, call loadMore..
+            if(innerHeight + scrollAmount >= container.clientHeight * 0.95 && isLoaded === false){
+                isLoaded = true;
+                setVisible('.loading', true);
+                onReady(onReadyCallback);
+                loadMore("San Jose, CA 95127", "restaurants");
+                console.log(isLoaded)
+            }
+        }
+    })
 
-})
 //function to create All Categories on site
 function writeCategories(restaurantsInfo){
     let parent = $('#restaurants-header');
@@ -151,9 +179,50 @@ function sort(button){
         }
     }
 }
-function loadMore(oage=1, perPage=15) { 
-    let endpoint = `https://api.unsplash.com/photos/?client_id=DhiFZgzN2K4X2uDEbkJKknZNYgsd2OgHTjttpQHCLN4&page=${page}&per_page=${imgPerPage}`;
-        return this.fetch(endpoint)
-            .then((blob) => blob.json())
-            .then((data) => addImg(data));
+function loadMore(location='San Jose, CA 95127', term='restaurants') { 
+    $.ajax({
+        url: 'https://api.yelp.com/v3/businesses/search',
+        type: 'GET',
+        contentType:"application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization','Bearer TsxsfBFtXD1hxgbraNm-sb-JF-xzEzAPFDvcXHykRvZII8n4UTm67QTkr5UXKXbSHKEhReJRQLdQhUBJhA53bSR_8vxzmzNZobwrFbsUMaGrEYWTBzRqHKVewRTpYnYx');
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+        },
+        dataType : 'json',
+        data : {location:location,
+                term: term
+        },
+        success: function(data){
+            console.log(data);
+            writeCategories(data);
+            writeRestaurants(data);
+            $('#restaurants-header button').click(function(){
+                sort(this)
+            })
+        },
+        error:function(xhr){
+            console.log(xhr);
+        }
+        
+    })
  }
+
+
+function setVisible(selector, visible) {
+    return document.querySelector(selector).style.display = visible ? 'block' : 'none';
+}
+
+function onReadyCallback(){
+    isLoaded = false; 
+    setVisible('.frame', true);
+    setVisible('.loading', false);
+   
+}
+function onReady(callback) {
+    let intervalId = window.setInterval(function(){
+    if (document.getElementsByTagName('body')[0] !== undefined){
+        window.clearInterval(intervalId);
+        callback.call(this);
+    }}, 1000);
+}
+})
