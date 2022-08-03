@@ -46,6 +46,9 @@ body{
     background-image: linear-gradient(to right,rgb(2, 241, 170),aqua);
     border: none;
     margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #restaurants-main{
     display: flex;
@@ -74,15 +77,18 @@ body{
     width: 100%;
     text-align: center;
     margin-top:5px;
+    height: 50px;
 }
-.single-restaurant-name button{
+.single-restaurant-name p{
+    text-align: center;
+    line-height: 40px;
     width: 50%;
     margin:auto;
     height: 50px;
     border-radius: 5px;
     background-color: white;
     border: 0.5px gray solid;
-    box-shadow: 1px 1px;
+    box-shadow: 1px 1px rgb(150, 150, 150);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -115,6 +121,8 @@ button:hover{
     background-image: linear-gradient(to right,rgb(2, 241, 170),aqua);
     border: none;
     position: relative;
+    box-shadow: 1px 1px rgb(150, 150, 150);
+    border-radius: 5px;
     top:15px;
     left:50%;
     transform: translateX(-50%);

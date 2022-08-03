@@ -1,0 +1,11 @@
+@media only screen and (max-width: 640px) {
+    #restaurants-header  button{
+        width: 50% ;
+    }
+    #restaurants-header{
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(6, calc(50% - 40px));
+        grid-template-rows: minmax(150px, 1fr);
+    }
+}
