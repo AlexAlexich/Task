@@ -38,7 +38,7 @@ body{
     border-radius: 5px;
     margin-left: 3%;
     background-image: linear-gradient(to right,rgb(2, 241, 170),aqua);
-    border: 0cm;
+    border: none;
     margin-bottom: 3px;
 }
 #restaurants-main{
@@ -50,10 +50,11 @@ body{
 .single-restaurant{
     width: 30%;
     border-radius: 15px;
-    min-height: 300px;
+    /* min-height: 300px; */
     background-color: white;
     margin-bottom: 30px;
 }
+
 .single-restaurant-image{
     width: 50%;
     margin: auto;
@@ -66,6 +67,7 @@ body{
 .single-restaurant-name{
     width: 100%;
     text-align: center;
+    margin-top:5px;
 }
 .single-restaurant-name button{
     width: 50%;
@@ -81,10 +83,11 @@ body{
     padding: 2px;
 }
 .single-restaurant-price-rating{
-    margin-top: 15px;
+    margin-top: 25px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 .single-restaurant-rating{
     width: 60%;
@@ -99,4 +102,14 @@ p{
 }
 button:hover{
     cursor: pointer;
+}
+.single-restaurant-view-button button{
+    width: 30%;
+    height: 30px;
+    background-image: linear-gradient(to right,rgb(2, 241, 170),aqua);
+    border: none;
+    position: relative;
+    top:15px;
+    left:50%;
+    transform: translateX(-50%);
 }

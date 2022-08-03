@@ -51,13 +51,16 @@ function writeCategories(restaurantsInfo){
 //function to create all Restaurants on site
 function writeRestaurants(restaurantsInfo){
     let parent = $('#restaurants-main');
+   
     //creating main restaurant divs
     for(restaurant of restaurantsInfo.businesses){
-        let newDiv = document.createElement('div');
+        let divFirst = document.createElement('div');
         let a = document.createElement('a');
+        let newDiv = document.createElement('div');
+        divFirst.append(a);
+        a.append(newDiv)
         //creating a tag for whole div
         a.setAttribute('href',`${restaurant.url}`)
-        a.setAttribute('class','a-whole')
         newDiv.setAttribute('class', 'single-restaurant');
         let attArr = [];
         for(cat of restaurant.categories){  
@@ -67,12 +70,12 @@ function writeRestaurants(restaurantsInfo){
         //console.log(attArr);
         newDiv.setAttribute('data-category',attArr);
        // console.log(newDiv.getAttribute('data-category'))
-        parent.append(newDiv);
+        parent.append(divFirst);
         //creating img div for restaurant
         let imgDiv = document.createElement('div');
         imgDiv.setAttribute('class','single-restaurant-image');
-        a.append(imgDiv)
-        newDiv.append(a);
+        newDiv.append(imgDiv)
+        a.append(newDiv);
         //creating img
         let img = document.createElement('img');
         img.setAttribute('src',`${restaurant.image_url}`);
@@ -81,7 +84,7 @@ function writeRestaurants(restaurantsInfo){
         //creating div for name field
         let nameFieldDiv = document.createElement('div');
         nameFieldDiv.setAttribute('class','single-restaurant-name');
-        a.append(nameFieldDiv);
+        newDiv.append(nameFieldDiv);
        // newDiv.append(a);
         //creating button
         let nameField= document.createElement('button');
@@ -90,7 +93,7 @@ function writeRestaurants(restaurantsInfo){
         //creating div with price and rating as 2 separate divs
         let priceRateDiv = document.createElement('div');
         priceRateDiv.setAttribute('class','single-restaurant-price-rating');
-        a.append(priceRateDiv);
+        newDiv.append(priceRateDiv);
         let rate = document.createElement('div');
         rate.setAttribute('class','single-restaurant-rating');
         priceRateDiv.append(rate);
@@ -120,7 +123,7 @@ function writeRestaurants(restaurantsInfo){
         //creating div with last button
         let lastDiv = document.createElement('div');
         lastDiv.setAttribute('class','single-restaurant-view-button');
-        a.append(lastDiv);
+        newDiv.append(lastDiv);
         let  btn = document.createElement('button')
         btn.innerHTML=`VIEW`
         lastDiv.append(btn);
