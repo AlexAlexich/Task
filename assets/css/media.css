@@ -1,7 +1,17 @@
 @media only screen and (max-width: 640px) {
     #restaurants-header  button{
-        width: 50% ;
+        width: 49% ;
+        /* display: none; */
     }
+    /* #restaurants-header  button:first-child,#restaurants-header  button:nth-child(2){
+        display: block;
+    }
+    #restaurants-header{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        
+    } */
     .single-restaurant{
         width: 100%;
     }

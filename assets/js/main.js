@@ -9,11 +9,13 @@
 //  chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
 
 window.addEventListener("load", function(){
+    onReady(onReadyCallback);
     let scrollAmount;
     let innerHeight = window.innerHeight;
     let container = this.document.querySelector("#restaurants-main");
     var isLoaded = false;
-    
+    var check = 1;
+    var sortVal ;
     $.ajax({
         url: 'https://api.yelp.com/v3/businesses/search',
         type: 'GET',
@@ -46,7 +48,7 @@ window.addEventListener("load", function(){
     window.addEventListener("scroll", function(){
         scrollAmount = window.scrollY;
         if (window.matchMedia('(max-width: 640px)').matches) {
-            if(innerHeight + scrollAmount >= container.clientHeight * (9/20)&& isLoaded === false){
+            if(innerHeight + scrollAmount >= container.clientHeight * (9/15)&& isLoaded === false){
                 isLoaded = true;
                 setVisible('.loading', true);
                 onReady(onReadyCallback);
@@ -64,7 +66,10 @@ window.addEventListener("load", function(){
             }
         }
     })
-
+    // if (window.matchMedia('(max-width: 640px)').matches){
+    //     swipedetect()
+    // }
+    
 //function to create All Categories on site
 function writeCategories(restaurantsInfo){
     let parent = $('#restaurants-header');
@@ -77,6 +82,7 @@ function writeCategories(restaurantsInfo){
                     let button =document.createElement('button');
                     button.innerHTML=`${categorie['title']}`;
                     button.setAttribute('data-category',`${categorie['alias']}`);
+                    button.setAttribute('class','btn')
                     parent.append(button) ;
                     catArr.push(`${categorie['title']}`);
                 }
@@ -164,7 +170,6 @@ function writeRestaurants(restaurantsInfo){
    
 }
 //function onBtnClickChangeCategorie
-
 function sort(button){
     let category = button.getAttribute('data-category');
     let restourants = $(".single-restaurant")
@@ -181,6 +186,9 @@ function sort(button){
             rest.classList.add('hide');
         }
     }
+    check = 0;
+    sortVal = category;
+    console.log(sortVal);
 }
 //function to load more items 
 function loadMore(location, term) { 
@@ -197,11 +205,31 @@ function loadMore(location, term) {
                 term: term
         },
         success: function(data){
-            console.log(data);
-            writeRestaurants(data);
-            $('#restaurants-header button').click(function(){
-                sort(this)
-            })
+            if(check==1){
+                console.log(data);
+                writeRestaurants(data);
+                $('#restaurants-header button').click(function(){
+                    sort(this)
+                })
+            }
+            else{
+                //if infinite scroll should be active when there is specific category 
+                writeRestaurants(data);
+                let restourants = $(".single-restaurant")
+                for(rest of restourants){
+                    rest.classList.add('hide');
+                }
+                for(rest of restourants){
+                    if(rest.getAttribute('data-category').includes(sortVal)){
+                        rest.classList.remove('hide');
+                        rest.classList.add('show');
+                    }
+                    else{
+                        rest.classList.remove('show');
+                        rest.classList.add('hide');
+                    }
+                }
+            }
         },
         error:function(xhr){
             console.log(xhr);
@@ -209,23 +237,67 @@ function loadMore(location, term) {
         
     })
  }
-
-
 function setVisible(selector, visible) {
     return document.querySelector(selector).style.display = visible ? 'block' : 'none';
 }
-
 function onReadyCallback(){
     isLoaded = false; 
-    setVisible('.frame', true);
+    setVisible('#restaurants', true);
     setVisible('.loading', false);
    
 }
 function onReady(callback) {
     let intervalId = window.setInterval(function(){
-    if (document.getElementsByTagName('body')[0] !== undefined){
+    if ($('body')[0] !== undefined){
         window.clearInterval(intervalId);
         callback.call(this);
     }}, 1000);
 }
+// function swipedetect(){
+//     let touchsurface = $('#restaurants-header button'),
+//     swipedir,
+//     startX,
+//     startY,
+//     distX,
+//     distY,
+//     threshold = 150, //required min distance traveled to be considered swipe
+//     restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+//     allowedTime = 300, // maximum time allowed to travel that distance
+//     elapsedTime,
+//     startTime
+//     touchsurface.on('touchstart', function(e){
+//         var touchobj = e.changedTouches[0]
+//         swipedir = 'none'
+//         dist = 0
+//         startX = touchobj.pageX
+//         startY = touchobj.pageY
+//         startTime = new Date().getTime() // record time when finger first makes contact with surface
+//         e.preventDefault()
+//     }, false)
+  
+//     touchsurface.on('touchmove', function(e){
+//         e.preventDefault() // prevent scrolling when inside DIV
+//     }, false)
+  
+//     touchsurface.on('touchend', function(e){
+//         var touchobj = e.changedTouches[0]
+//         distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+//         distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+//         elapsedTime = new Date().getTime() - startTime // get time elapsed
+//         if (elapsedTime <= allowedTime){ // first condition for awipe met
+//             if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+//                 swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+//             }
+
+//         }
+//         handleswipe(swipedir)
+//         e.preventDefault()
+//     }, false)
+
+//     if (swipedir =='left'){console.log('levo')}
+//     else if(swipedir=='right'){
+//         console.log('right');
+//     }
+
+// }
 })
