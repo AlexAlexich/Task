@@ -44,21 +44,60 @@ window.addEventListener("load", function(){
         }
         
     })
-    if (window.matchMedia('(max-width: 640px)').matches){
-        $('#restaurants-header').on('swipeleft',function(){
-            let buttons = document.getElementsByClassName('btn')
-            //console.log(buttons)
-            for(btn of buttons){
-                console.log(btn);
-                if(btn.style.display==='block'){
-                    
-                }
+    let intervalId = window.setInterval(function(){
+        if ($('body')[0] !== undefined){
+            window.clearInterval(intervalId);
+            if (window.matchMedia('(max-width: 640px)').matches){
+                let buttons = $('.btn')
+                let showBtn 
+                let firstBtn
+                let nextFist
+                let nextSecond
+                //console.log(buttons);  
+                $('#restaurants-header').on('swipeleft',function(){
+                    for(let i = 0;i<buttons.length;i++){
+                       if(window.getComputedStyle(buttons[i]).display=="block"){
+                             showBtn = buttons[i];
+                             firstBtn = buttons[i-1]
+                       }
+                       
+                    }
+                   // console.log(firstBtn)
+                    nextFist = showBtn.nextSibling
+                    nextSecond = nextFist.nextSibling
+                    if(nextFist!=null && nextSecond!=null){
+                        showBtn.style.display='none'
+                        firstBtn.style.display='none'
+                        nextFist.style.display='block'
+                        nextSecond.style.display='block' 
+                    } 
+                })
+                $('#restaurants-header').on('swiperight',function(){
+                    for(let i = 0;i<buttons.length;i++){
+                        if(window.getComputedStyle(buttons[i]).display=="block"){
+                              showBtn = buttons[i];
+                              firstBtn = buttons[i-1]
+                        }
+                        
+                     }
+                    //  console.log(firstBtn)
+                     nextFist = firstBtn.previousSibling
+                     nextSecond = nextFist.previousSibling
+                    //  console.log(nextFist)
+                    //  console.log(nextSecond)
+                     if(nextFist!=null && nextSecond!=null){
+                     showBtn.style.display='none'
+                     firstBtn.style.display='none'
+                     nextFist.style.display='block'
+                     nextSecond.style.display='block' 
+                    }
+                })
             }
-        })
-        $('#restaurants-header').on('swiperight',function(){
-            console.log('desno')
-        })
-    }
+            else{
+                $('#restaurants-header').on('swiperight',console.log())
+            }
+        }}, 1000);
+    
     //infinite scroll 
     window.addEventListener("scroll", function(){
         scrollAmount = window.scrollY;
