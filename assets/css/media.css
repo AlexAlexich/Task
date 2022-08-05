@@ -1,17 +1,18 @@
 @media only screen and (max-width: 640px) {
     #restaurants-header  button{
         width: 49% ;
-        /* display: none; */
+        display: none;
     }
-    /* #restaurants-header  button:first-child,#restaurants-header  button:nth-child(2){
+    #restaurants-header  button:first-child,#restaurants-header  button:nth-child(2){
         display: block;
     }
     #restaurants-header{
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
+        touch-action: none;
         
-    } */
+    }
     .single-restaurant{
         width: 100%;
     }

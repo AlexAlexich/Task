@@ -44,6 +44,21 @@ window.addEventListener("load", function(){
         }
         
     })
+    if (window.matchMedia('(max-width: 640px)').matches){
+        $('#restaurants-header').on('swipeleft',function(){
+            let buttons = document.getElementsByClassName('btn')
+            //console.log(buttons)
+            for(btn of buttons){
+                console.log(btn);
+                if(btn.style.display==='block'){
+                    
+                }
+            }
+        })
+        $('#restaurants-header').on('swiperight',function(){
+            console.log('desno')
+        })
+    }
     //infinite scroll 
     window.addEventListener("scroll", function(){
         scrollAmount = window.scrollY;
@@ -66,9 +81,7 @@ window.addEventListener("load", function(){
             }
         }
     })
-    // if (window.matchMedia('(max-width: 640px)').matches){
-    //     swipedetect()
-    // }
+   
     
 //function to create All Categories on site
 function writeCategories(restaurantsInfo){
@@ -237,6 +250,7 @@ function loadMore(location, term) {
         
     })
  }
+//functions for loading pic
 function setVisible(selector, visible) {
     return document.querySelector(selector).style.display = visible ? 'block' : 'none';
 }
@@ -301,3 +315,4 @@ function onReady(callback) {
 
 // }
 })
+
