@@ -24,7 +24,7 @@ body{
     margin: auto;
     margin-top: 30px;
 }
-#restaurants-header {
+#restaurants-header,.restaurants-header-s {
     overflow: auto;
     white-space: nowrap;
 }
@@ -37,7 +37,7 @@ body{
     background: #000;
     border-radius: 10px;
 }
-#restaurants-header  button{
+#restaurants-header  button,.btn-s{
     width: 30% ;
     height: 50px;
     font-size: 20px;
@@ -56,7 +56,7 @@ body{
     flex-wrap: wrap;
     margin-top: 40px;
 }
-.single-restaurant{
+.single-restaurant,.single-restaurant-s{
     width: 30%;
     border-radius: 15px;
     /* min-height: 300px; */
@@ -141,3 +141,19 @@ button:hover{
     background-repeat: no-repeat;
     background-position: center;
 }
+.ui-loader{
+    display: none;
+}
+.skeleton {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 31%, 94%);
+    }
+  
+    100% {
+      background-color: hsl(203, 70%, 82%);
+    }
+  }

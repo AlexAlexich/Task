@@ -9,6 +9,30 @@
 //  chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
 
 window.addEventListener("load", function(){
+    // //skeleton
+    // let skelHead = $('#restaurants-header-skeleton')
+    // let skelMain = $('#restaurants-main-skeleton')
+    // for(let i=0;i<3;i++){
+    //     let button =document.createElement('button');
+    //     button.setAttribute('class','btn-skeleton')
+    //     skelHead.append(button);
+    //     let imgDiv = document.createElement('div');
+    //     imgDiv.setAttribute('class','single-restaurant-image-skeleton');
+    //     newDiv.append(imgDiv);
+    // }
+    // for(let i=0;i<10;i++){
+    //     let newDiv = document.createElement('div');
+    //     newDiv.setAttribute('class','single-restaurant-skeleton')
+    //     skelMain.append(newDiv)
+    // }
+    const headTemp = document.getElementById('header-template')
+    for (let i = 0; i < 3; i++) {
+      $('.restaurants-header-s').append(headTemp.content.cloneNode(true))
+    }
+    const restTemplate = document.getElementById('Restaurant-template')
+    for (let i = 0; i < 10; i++) {
+      $('#restaurants-main').append(restTemplate.content.cloneNode(true))
+    }
     onReady(onReadyCallback);
     let scrollAmount;
     let innerHeight = window.innerHeight;
@@ -16,6 +40,7 @@ window.addEventListener("load", function(){
     var isLoaded = false;
     var check = 1;
     var sortVal ;
+    $('.ui-loader ui-corner-all ui-loader-default ui-body-a').innerHTML=" "
     $.ajax({
         url: 'https://api.yelp.com/v3/businesses/search',
         type: 'GET',
@@ -32,7 +57,7 @@ window.addEventListener("load", function(){
                 term: "restaurants"
         },
         success: function(data){
-            console.log(data);
+            $('.skeleton').css('display','none')
             writeCategories(data);
             writeRestaurants(data);
             $('#restaurants-header button').click(function(){
@@ -93,9 +118,7 @@ window.addEventListener("load", function(){
                     }
                 })
             }
-            else{
-                $('#restaurants-header').on('swiperight',console.log())
-            }
+            
         }}, 1000);
     
     //infinite scroll 
